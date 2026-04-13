@@ -1,0 +1,47 @@
+name: Build APK Android
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm install --legacy-peer-deps
+          npm install -g eas-cli
+
+      - name: Fix Expo dependencies
+        run: npx expo install --fix
+
+      - name: Validate project
+        run: npx expo doctor
+
+      - name: Build APK with EAS
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: |
+          eas build \
+            --platform android \
+            --profile preview-apk \
+            --non-interactive
+
+      - name: Show build info
+        run: |
+          echo "✅ Build terminé !"
+          echo "📱 L'APK est disponible sur Expo.dev"
+          echo "🔗 Vérifie les logs du workflow pour le lien de téléchargement"

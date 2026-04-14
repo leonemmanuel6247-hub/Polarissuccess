@@ -26,11 +26,18 @@ git push origin main
 
 ## 🔧 Configuration requise
 
-### Secret GitHub : `EXPO_TOKEN`
+### Secrets GitHub requis
 
-1. Va sur https://expo.dev → Settings → Access Tokens → **Create Token**
-2. Sur GitHub → Repo → **Settings** → Secrets and variables → Actions → **New repository secret**
-3. Nom : `EXPO_TOKEN` | Valeur : ton token Expo
+Va sur GitHub → Repo → **Settings** → Secrets and variables → Actions → **New repository secret**
+
+Ajoute ces 2 secrets :
+
+| Secret | Valeur |
+|---|---|
+| `EXPO_USERNAME` | Ton identifiant Expo (email) |
+| `EXPO_PASSWORD` | Ton mot de passe Expo |
+
+> 💡 Crée un compte sur https://expo.dev si tu n'en as pas.
 
 ## 📦 Workflow GitHub Actions
 
@@ -64,4 +71,4 @@ Pour un build manuel : GitHub → **Actions** → **Build APK Android** → **Ru
 | react-native | 0.72.10 |
 | @react-native-async-storage/async-storage | 1.18.2 |
 | react-native-webview | 13.2.2 |
-| @expo/metro-runtime | ~3.3.2 |
+| @expo/metro-runtime | ~3.1.3 |
